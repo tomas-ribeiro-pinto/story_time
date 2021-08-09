@@ -15,7 +15,7 @@ typedef _StoryItemBuilder = Widget Function(
 
 typedef _StoryConfigFunction = int Function(int pageIndex);
 
-enum IndicatorAnimationCommand { pause, resume }
+// enum IndicatorAnimationCommand { pause, resume }
 
 /// PageView to implement story like UI
 ///
@@ -259,14 +259,17 @@ class _StoryPageFrameState extends State<_StoryPageFrame>
 
     listener = () {
       if (widget.isCurrentPage) {
-        switch (widget.indicatorAnimationController?.value) {
-          case IndicatorAnimationCommand.pause:
+        IndicatorAnimationCommand? command =
+            widget.indicatorAnimationController?.value;
+        if (command != null) {
+          if (command.pause == true) {
             animationController.stop();
-            break;
-          case IndicatorAnimationCommand.resume:
-          default:
+          } else if (command.resume == true) {
             animationController.forward();
-            break;
+          } else if (command.duration != null) {
+            animationController.reset();
+            animationController.duration = command.duration;
+          }
         }
       }
     };
@@ -345,4 +348,16 @@ class _StoryPageFrameState extends State<_StoryPageFrame>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class IndicatorAnimationCommand {
+  final bool? pause;
+  final bool? resume;
+  final Duration? duration;
+
+  IndicatorAnimationCommand({
+    this.pause,
+    this.resume,
+    this.duration,
+  });
 }

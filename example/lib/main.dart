@@ -99,7 +99,8 @@ class _StoryPageState extends State<StoryPage> {
   void initState() {
     super.initState();
     indicatorAnimationController = ValueNotifier<IndicatorAnimationCommand>(
-        IndicatorAnimationCommand.resume);
+      IndicatorAnimationCommand(resume: true),
+    );
   }
 
   @override
@@ -115,6 +116,15 @@ class _StoryPageState extends State<StoryPage> {
         itemBuilder: (context, pageIndex, storyIndex) {
           final user = sampleUsers[pageIndex];
           final story = user.stories[storyIndex];
+          if (storyIndex == 1) {
+            indicatorAnimationController.value = IndicatorAnimationCommand(
+              duration: Duration(seconds: 20),
+            );
+          } else {
+            indicatorAnimationController.value = IndicatorAnimationCommand(
+              duration: Duration(seconds: 5),
+            );
+          }
           return Stack(
             children: [
               Positioned.fill(
@@ -180,7 +190,9 @@ class _StoryPageState extends State<StoryPage> {
                   child: Text('show modal bottom sheet'),
                   onPressed: () async {
                     indicatorAnimationController.value =
-                        IndicatorAnimationCommand.pause;
+                        IndicatorAnimationCommand(
+                      pause: true,
+                    );
                     await showModalBottomSheet(
                       context: context,
                       builder: (context) => SizedBox(
@@ -197,7 +209,9 @@ class _StoryPageState extends State<StoryPage> {
                       ),
                     );
                     indicatorAnimationController.value =
-                        IndicatorAnimationCommand.resume;
+                        IndicatorAnimationCommand(
+                      resume: true,
+                    );
                   },
                 ),
               ),
