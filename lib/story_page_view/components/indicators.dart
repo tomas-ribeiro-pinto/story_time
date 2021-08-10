@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:story/story_page_view/story_limit_controller.dart';
+import 'package:story_time/story_page_view/story_limit_controller.dart';
 
 import '../story_stack_controller.dart';
 

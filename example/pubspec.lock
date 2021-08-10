@@ -124,10 +124,17 @@ packages:
   story:
     dependency: "direct main"
     description:
+      name: story
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.1"
+  story_time:
+    dependency: "direct overridden"
+    description:
       path: ".."
       relative: true
     source: path
-    version: "0.5.1"
+    version: "1.0.0"
   stream_channel:
     dependency: transitive
     description:
@@ -172,4 +179,4 @@ packages:
     version: "2.1.0"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.16.0"
+  flutter: ">=1.17.0"

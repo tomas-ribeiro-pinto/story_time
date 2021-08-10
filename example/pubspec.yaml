@@ -36,7 +36,7 @@ dev_dependencies:
 
 
 dependency_overrides:
-  story:
+  story_time:
     path: ../
 
 # For information on the generic Dart part of this file, see the

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:story/story_page_view/story_page_view.dart';
+import 'package:story_time/story_page_view/story_page_view.dart';
 
 void main() {
   runApp(MyApp());
