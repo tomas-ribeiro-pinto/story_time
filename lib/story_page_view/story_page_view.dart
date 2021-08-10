@@ -15,8 +15,6 @@ typedef _StoryItemBuilder = Widget Function(
 
 typedef _StoryConfigFunction = int Function(int pageIndex);
 
-// enum IndicatorAnimationCommand { pause, resume }
-
 /// PageView to implement story like UI
 ///
 /// [itemBuilder], [storyLength], [pageLength] are required.
@@ -350,6 +348,7 @@ class _StoryPageFrameState extends State<_StoryPageFrame>
   bool get wantKeepAlive => true;
 }
 
+/// Simple class to issue commands using indicatorAnimationController.
 class IndicatorAnimationCommand {
   final bool? pause;
   final bool? resume;

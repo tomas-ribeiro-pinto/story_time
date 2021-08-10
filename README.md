@@ -1,4 +1,4 @@
-# story
+# story_time
 
 [![pub package](https://img.shields.io/pub/v/story.svg)](https://pub.dev/packages/story)
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="License: MIT"></a>
@@ -137,6 +137,10 @@ class StoryModel {
 }
 ```
 
+## Controlling animations
+My point of forking the original package was to add the ability to 
+control the duration of a specific index of a story. Look at the example
+to see how to use it if you are interested.
 
 ## Tips
 
