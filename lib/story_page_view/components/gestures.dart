@@ -4,9 +4,14 @@ import 'package:provider/provider.dart';
 import '../story_stack_controller.dart';
 
 class Gestures extends StatelessWidget {
+  final Function()? onStoryPaused;
+  final Function()? onStoryUnpaused;
+
   const Gestures({
     Key? key,
     required this.animationController,
+    this.onStoryPaused,
+    this.onStoryUnpaused,
   }) : super(key: key);
 
   final AnimationController? animationController;
@@ -24,9 +29,11 @@ class Gestures extends StatelessWidget {
                 context.read<StoryStackController>().decrement();
               },
               onLongPress: () {
+                onStoryPaused?.call();
                 animationController!.stop();
               },
               onLongPressUp: () {
+                onStoryUnpaused?.call();
                 animationController!.forward();
               },
             ),
@@ -44,9 +51,11 @@ class Gestures extends StatelessWidget {
                     );
               },
               onLongPress: () {
+                onStoryPaused?.call();
                 animationController!.stop();
               },
               onLongPressUp: () {
+                onStoryUnpaused?.call();
                 animationController!.forward();
               },
             ),

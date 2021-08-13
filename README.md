@@ -139,8 +139,11 @@ class StoryModel {
 
 ## Controlling animations
 My point of forking the original package was to add the ability to 
-control the duration of a specific index of a story. Look at the example
-to see how to use it if you are interested.
+control the duration of a specific index of a story. Look at the example to see how to use it if you are interested.
+
+## Callbacks for pausing and unpausing stories
+The package also supports adding callbacks for pausing and unpausing a story to the StoryPageView widget. See the example project for more
+details.
 
 ## Tips
 

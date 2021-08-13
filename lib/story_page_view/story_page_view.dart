@@ -33,6 +33,8 @@ class StoryPageView extends StatefulWidget {
         const EdgeInsets.symmetric(vertical: 32, horizontal: 8),
     this.backgroundColor = Colors.black,
     this.indicatorAnimationController,
+    this.onStoryPaused,
+    this.onStoryUnpaused,
   }) : super(key: key);
 
   /// Function to build story content
@@ -72,6 +74,14 @@ class StoryPageView extends StatefulWidget {
   /// A stream with [IndicatorAnimationCommand] to force pause or continue inticator animation
   /// Useful when you need to show any popup over the story
   final ValueNotifier<IndicatorAnimationCommand>? indicatorAnimationController;
+
+  /// A function to be called whenever the user holds down a story
+  /// Useful when displaying a video and you need to pause the video
+  final Function()? onStoryPaused;
+
+  /// A function to be called whenever the user stops holding down a story
+  /// Useful when displaying a video and you need to unpause the video
+  final Function()? onStoryUnpaused;
 
   @override
   _StoryPageViewState createState() => _StoryPageViewState();
@@ -138,6 +148,8 @@ class _StoryPageViewState extends State<StoryPageView> {
                   indicatorPadding: widget.indicatorPadding,
                   indicatorAnimationController:
                       widget.indicatorAnimationController,
+                  onStoryPaused: widget.onStoryPaused,
+                  onStoryUnpaused: widget.onStoryUnpaused,
                 ),
                 if (isPaging && !isLeaving)
                   Positioned.fill(
@@ -170,6 +182,8 @@ class _StoryPageFrame extends StatefulWidget {
     required this.indicatorDuration,
     required this.indicatorPadding,
     required this.indicatorAnimationController,
+    required this.onStoryPaused,
+    required this.onStoryUnpaused,
   }) : super(key: key);
   final int storyLength;
   final int initialStoryIndex;
@@ -181,6 +195,8 @@ class _StoryPageFrame extends StatefulWidget {
   final Duration indicatorDuration;
   final EdgeInsetsGeometry indicatorPadding;
   final ValueNotifier<IndicatorAnimationCommand>? indicatorAnimationController;
+  final Function()? onStoryPaused;
+  final Function()? onStoryUnpaused;
 
   static Widget wrapped({
     required int pageIndex,
@@ -197,6 +213,8 @@ class _StoryPageFrame extends StatefulWidget {
     required EdgeInsetsGeometry indicatorPadding,
     required ValueNotifier<IndicatorAnimationCommand>?
         indicatorAnimationController,
+    required Function()? onStoryPaused,
+    required Function()? onStoryUnpaused,
   }) {
     return MultiProvider(
       providers: [
@@ -235,6 +253,8 @@ class _StoryPageFrame extends StatefulWidget {
         indicatorDuration: indicatorDuration,
         indicatorPadding: indicatorPadding,
         indicatorAnimationController: indicatorAnimationController,
+        onStoryPaused: onStoryPaused,
+        onStoryUnpaused: onStoryUnpaused,
       ),
     );
   }
@@ -330,6 +350,8 @@ class _StoryPageFrameState extends State<_StoryPageFrame>
           padding: widget.indicatorPadding,
         ),
         Gestures(
+          onStoryUnpaused: widget.onStoryUnpaused,
+          onStoryPaused: widget.onStoryPaused,
           animationController: animationController,
         ),
         Positioned.fill(

@@ -113,6 +113,12 @@ class _StoryPageState extends State<StoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StoryPageView(
+        onStoryUnpaused: () {
+          print("Story is unpaused!!");
+        },
+        onStoryPaused: () {
+          print("Story is paused!!");
+        },
         itemBuilder: (context, pageIndex, storyIndex) {
           final user = sampleUsers[pageIndex];
           final story = user.stories[storyIndex];
@@ -169,53 +175,55 @@ class _StoryPageState extends State<StoryPage> {
           );
         },
         gestureItemBuilder: (context, pageIndex, storyIndex) {
-          return Stack(children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 32),
-                child: IconButton(
-                  padding: EdgeInsets.zero,
-                  color: Colors.white,
-                  icon: Icon(Icons.close),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+          return Stack(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 32),
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    color: Colors.white,
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
               ),
-            ),
-            if (pageIndex == 0)
-              Center(
-                child: ElevatedButton(
-                  child: Text('show modal bottom sheet'),
-                  onPressed: () async {
-                    indicatorAnimationController.value =
-                        IndicatorAnimationCommand(
-                      pause: true,
-                    );
-                    await showModalBottomSheet(
-                      context: context,
-                      builder: (context) => SizedBox(
-                        height: MediaQuery.of(context).size.height / 2,
-                        child: Padding(
-                          padding: EdgeInsets.all(24),
-                          child: Text(
-                            'Look! The indicator is now paused\n\n'
-                            'It will be coutinued after closing the modal bottom sheet.',
-                            style: Theme.of(context).textTheme.headline5,
-                            textAlign: TextAlign.center,
+              if (pageIndex == 0)
+                Center(
+                  child: ElevatedButton(
+                    child: Text('show modal bottom sheet'),
+                    onPressed: () async {
+                      indicatorAnimationController.value =
+                          IndicatorAnimationCommand(
+                        pause: true,
+                      );
+                      await showModalBottomSheet(
+                        context: context,
+                        builder: (context) => SizedBox(
+                          height: MediaQuery.of(context).size.height / 2,
+                          child: Padding(
+                            padding: EdgeInsets.all(24),
+                            child: Text(
+                              'Look! The indicator is now paused\n\n'
+                              'It will be coutinued after closing the modal bottom sheet.',
+                              style: Theme.of(context).textTheme.headline5,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                    indicatorAnimationController.value =
-                        IndicatorAnimationCommand(
-                      resume: true,
-                    );
-                  },
+                      );
+                      indicatorAnimationController.value =
+                          IndicatorAnimationCommand(
+                        resume: true,
+                      );
+                    },
+                  ),
                 ),
-              ),
-          ]);
+            ],
+          );
         },
         indicatorAnimationController: indicatorAnimationController,
         initialStoryIndex: (pageIndex) {
