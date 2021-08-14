@@ -1,6 +1,11 @@
 Changelog
 =========
 
+### Version 1.0.3 (2021-08-14)
+* 1. Added oldPageIndex and newPageIndex as arguments to 
+     onPageForward and onPageBack.
+* 2. Updated example.
+
 ### Version 1.0.2 (2021-08-14)
 * 1. Added onPageForward and onPageBackwards callbacks.
 * 2. Updated readme and example.
