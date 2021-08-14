@@ -113,11 +113,11 @@ class _StoryPageState extends State<StoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StoryPageView(
-        onPageBack: () {
-          print("going a page backwards");
+        onPageBack: (int oldPage, int newPage) {
+          print("from oldPage:$oldPage to newPage:$newPage");
         },
-        onPageForward: () {
-          print("going a page forwards");
+        onPageForward: (int oldPage, int newPage) {
+          print("from oldPage:$oldPage to newPage:$newPage");
         },
         onStoryUnpaused: () {
           print("Story is unpaused!!");

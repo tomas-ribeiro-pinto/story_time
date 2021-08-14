@@ -79,17 +79,17 @@ class StoryPageView extends StatefulWidget {
 
   /// Called whenever the user holds down a story
   /// Useful when displaying a video and you need to pause the video
-  final Function()? onStoryPaused;
+  final VoidCallback? onStoryPaused;
 
   /// Called whenever the user stops holding down a story
   /// Useful when displaying a video and you need to unpause the video
-  final Function()? onStoryUnpaused;
+  final VoidCallback? onStoryUnpaused;
 
   /// Called whenever the user is going backwards to a new page
-  final Function()? onPageBack;
+  final void Function(int oldPage, int newPage)? onPageBack;
 
   /// Called whenever the user is going forwards to a new page
-  final Function()? onPageForward;
+  final void Function(int oldPage, int newPage)? onPageForward;
 
   @override
   _StoryPageViewState createState() => _StoryPageViewState();
@@ -119,13 +119,13 @@ class _StoryPageViewState extends State<StoryPageView> {
     return ColoredBox(
       color: widget.backgroundColor,
       child: PageView.builder(
-        onPageChanged: (int newInd) {
-          if (pageController!.hasClients &&
-              pageController!.page!.toInt() >= newInd) {
-            widget.onPageBack?.call();
-          } else if (pageController!.hasClients &&
-              pageController!.page!.toInt() < newInd) {
-            widget.onPageForward?.call();
+        onPageChanged: (int newPage) {
+          bool hasClients = pageController!.hasClients;
+          int oldPage = pageController!.page!.toInt();
+          if (hasClients && oldPage >= newPage) {
+            widget.onPageBack?.call(oldPage + 1, newPage);
+          } else if (hasClients && oldPage < newPage) {
+            widget.onPageForward?.call(oldPage, newPage);
           }
         },
         controller: pageController,
