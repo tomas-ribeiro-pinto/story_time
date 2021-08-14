@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### Version 1.0.2 (2021-08-14)
+* 1. Added onPageForward and onPageBackwards callbacks.
+* 2. Updated readme and example.
+
 ### Version 1.0.1 (2021-08-12)
 * 1. Added onStoryPaused and onStoryUnpaused callbacks.
 * 2. Updated readme and example.

@@ -35,6 +35,8 @@ class StoryPageView extends StatefulWidget {
     this.indicatorAnimationController,
     this.onStoryPaused,
     this.onStoryUnpaused,
+    this.onPageBack,
+    this.onPageForward,
   }) : super(key: key);
 
   /// Function to build story content
@@ -75,13 +77,19 @@ class StoryPageView extends StatefulWidget {
   /// Useful when you need to show any popup over the story
   final ValueNotifier<IndicatorAnimationCommand>? indicatorAnimationController;
 
-  /// A function to be called whenever the user holds down a story
+  /// Called whenever the user holds down a story
   /// Useful when displaying a video and you need to pause the video
   final Function()? onStoryPaused;
 
-  /// A function to be called whenever the user stops holding down a story
+  /// Called whenever the user stops holding down a story
   /// Useful when displaying a video and you need to unpause the video
   final Function()? onStoryUnpaused;
+
+  /// Called whenever the user is going backwards to a new page
+  final Function()? onPageBack;
+
+  /// Called whenever the user is going forwards to a new page
+  final Function()? onPageForward;
 
   @override
   _StoryPageViewState createState() => _StoryPageViewState();
@@ -111,6 +119,15 @@ class _StoryPageViewState extends State<StoryPageView> {
     return ColoredBox(
       color: widget.backgroundColor,
       child: PageView.builder(
+        onPageChanged: (int newInd) {
+          if (pageController!.hasClients &&
+              pageController!.page!.toInt() >= newInd) {
+            widget.onPageBack?.call();
+          } else if (pageController!.hasClients &&
+              pageController!.page!.toInt() < newInd) {
+            widget.onPageForward?.call();
+          }
+        },
         controller: pageController,
         itemCount: widget.pageLength,
         itemBuilder: (context, index) {
@@ -227,6 +244,7 @@ class _StoryPageFrame extends StatefulWidget {
             onPageBack: () {
               if (pageIndex != 0) {
                 animateToPage(pageIndex - 1);
+                // onPageBack?.call();
               }
             },
             onPageForward: () {
@@ -236,6 +254,7 @@ class _StoryPageFrame extends StatefulWidget {
                     .onPageLimitReached(onPageLimitReached);
               } else {
                 animateToPage(pageIndex + 1);
+                // onPageForward?.call();
               }
             },
             initialStoryIndex: initialStoryIndex,
@@ -276,7 +295,7 @@ class _StoryPageFrameState extends State<_StoryPageFrame>
     super.initState();
 
     listener = () {
-      if (widget.isCurrentPage) {
+      if (widget.isCurrentPage && !widget.isPaging) {
         IndicatorAnimationCommand? command =
             widget.indicatorAnimationController?.value;
         if (command != null) {

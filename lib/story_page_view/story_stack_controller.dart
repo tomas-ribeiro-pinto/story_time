@@ -15,10 +15,10 @@ class StoryStackController extends ValueNotifier<int> {
 
   int get limitIndex => storyLength - 1;
 
-  //AnimationController? animationController;
-
-  void increment(
-      {VoidCallback? restartAnimation, VoidCallback? completeAnimation}) {
+  void increment({
+    VoidCallback? restartAnimation,
+    VoidCallback? completeAnimation,
+  }) {
     if (value == limitIndex) {
       completeAnimation?.call();
       onPageForward();
