@@ -1,6 +1,6 @@
 name: story_time
 description: A fork of story. Instagram stories like UI with rich animations and even more customizability than the original package.
-version: 1.0.3
+version: 1.0.4
 homepage: https://github.com/tjcampanella/story_time 
 
 environment:

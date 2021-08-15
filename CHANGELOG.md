@@ -1,6 +1,12 @@
 Changelog
 =========
 
+### Version 1.0.4 (2021-08-15)
+* 1. Added a callback for when the index of the story changes.
+* 2. Removed oldPageIndex as an argument to onPageForward and onPageBack.
+     This can be easily calculated if needed.
+* 3. Updated example.
+
 ### Version 1.0.3 (2021-08-14)
 * 1. Added oldPageIndex and newPageIndex as arguments to 
      onPageForward and onPageBack.

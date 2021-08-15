@@ -113,11 +113,25 @@ class _StoryPageState extends State<StoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StoryPageView(
-        onPageBack: (int oldPage, int newPage) {
-          print("from oldPage:$oldPage to newPage:$newPage");
+        onStoryIndexChanged: (int newStoryIndex) {
+          print('newStoryInd: $newStoryIndex');
+          if (newStoryIndex == 1) {
+            indicatorAnimationController.value = IndicatorAnimationCommand(
+              duration: Duration(seconds: 20),
+            );
+          } else {
+            indicatorAnimationController.value = IndicatorAnimationCommand(
+              duration: Duration(seconds: 5),
+            );
+          }
         },
-        onPageForward: (int oldPage, int newPage) {
-          print("from oldPage:$oldPage to newPage:$newPage");
+        onPageBack: (int newPageIndex) {
+          int oldPage = newPageIndex + 1;
+          print("from oldPage:$oldPage to newPage:$newPageIndex");
+        },
+        onPageForward: (int newPageIndex) {
+          int oldPage = newPageIndex - 1;
+          print("from oldPage:$oldPage to newPage:$newPageIndex");
         },
         onStoryUnpaused: () {
           print("Story is unpaused!!");
@@ -128,15 +142,6 @@ class _StoryPageState extends State<StoryPage> {
         itemBuilder: (context, pageIndex, storyIndex) {
           final user = sampleUsers[pageIndex];
           final story = user.stories[storyIndex];
-          if (storyIndex == 1) {
-            indicatorAnimationController.value = IndicatorAnimationCommand(
-              duration: Duration(seconds: 20),
-            );
-          } else {
-            indicatorAnimationController.value = IndicatorAnimationCommand(
-              duration: Duration(seconds: 5),
-            );
-          }
           return Stack(
             children: [
               Positioned.fill(

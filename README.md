@@ -149,6 +149,9 @@ details.
 ## Callbacks for moving to a different page
 The package also supports adding callbacks for going a page backwards and for going a page forwards to the StoryPageView widget. See the example project for more details.
 
+## Callbacks for moving to a different story
+The package also supports adding a callback for whenever the story index changes to the StoryPageView widget. See the example project for more details.
+
 ## Tips
 
 This package is still under development. If you have any requests or questions, please ask on [github](https://github.com/santa112358/story/issues)
