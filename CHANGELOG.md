@@ -1,6 +1,9 @@
 Changelog
 =========
 
+### Version 1.0.5 (2021-09-28)
+* 1. Update provider version to 6.0.1
+
 ### Version 1.0.4 (2021-08-15)
 * 1. Added a callback for when the index of the story changes.
 * 2. Removed oldPageIndex as an argument to onPageForward and onPageBack.
