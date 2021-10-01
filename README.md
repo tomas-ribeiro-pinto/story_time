@@ -154,6 +154,6 @@ The package also supports adding a callback for whenever the story index changes
 
 ## Tips
 
-This package is still under development. If you have any requests or questions, please ask on [github](https://github.com/santa112358/story/issues)
+This package is still under development. If you have any requests or questions, please ask on [github](https://github.com/tjcampanella/story_time/issues)
 
 
