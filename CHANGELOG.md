@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### Version 1.0.6 (2022-06-22)
+* 1. Added strict linting rules
+* 2. Update provider version to 6.0.3
+
 ### Version 1.0.5 (2021-09-28)
 * 1. Update provider version to 6.0.1
 

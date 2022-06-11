@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:story_time/story_page_view/story_limit_controller.dart';
@@ -21,10 +20,10 @@ class Indicators extends StatefulWidget {
   final bool isPaging;
 
   @override
-  _IndicatorsState createState() => _IndicatorsState();
+  IndicatorsState createState() => IndicatorsState();
 }
 
-class _IndicatorsState extends State<Indicators> {
+class IndicatorsState extends State<Indicators> {
   late Animation<double> indicatorAnimation;
 
   @override
@@ -99,7 +98,7 @@ class _Indicator extends StatelessWidget {
         child: LinearProgressIndicator(
           value: value,
           backgroundColor: Colors.black.withOpacity(0.08),
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
           minHeight: 2,
         ),
       ),

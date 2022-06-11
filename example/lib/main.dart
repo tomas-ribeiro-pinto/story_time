@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:story_time/story_page_view/story_page_view.dart';
+import 'package:story_time/story_time.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class UserModel {
@@ -20,6 +22,8 @@ class StoryModel {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -30,24 +34,26 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          child: Text('show stories'),
+          child: const Text('show stories'),
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return StoryPage();
+                  return const StoryPage();
                 },
               ),
             );
@@ -59,13 +65,13 @@ class MyHomePage extends StatelessWidget {
 }
 
 class StoryPage extends StatefulWidget {
-  StoryPage({Key? key}) : super(key: key);
+  const StoryPage({Key? key}) : super(key: key);
 
   @override
-  _StoryPageState createState() => _StoryPageState();
+  StoryPageState createState() => StoryPageState();
 }
 
-class _StoryPageState extends State<StoryPage> {
+class StoryPageState extends State<StoryPage> {
   late ValueNotifier<IndicatorAnimationCommand> indicatorAnimationController;
   final sampleUsers = [
     UserModel([
@@ -117,11 +123,11 @@ class _StoryPageState extends State<StoryPage> {
           print('newStoryInd: $newStoryIndex');
           if (newStoryIndex == 1) {
             indicatorAnimationController.value = IndicatorAnimationCommand(
-              duration: Duration(seconds: 20),
+              duration: const Duration(seconds: 20),
             );
           } else {
             indicatorAnimationController.value = IndicatorAnimationCommand(
-              duration: Duration(seconds: 5),
+              duration: const Duration(seconds: 5),
             );
           }
         },
@@ -173,7 +179,7 @@ class _StoryPageState extends State<StoryPage> {
                     ),
                     Text(
                       user.userName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 17,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -195,7 +201,7 @@ class _StoryPageState extends State<StoryPage> {
                   child: IconButton(
                     padding: EdgeInsets.zero,
                     color: Colors.white,
-                    icon: Icon(Icons.close),
+                    icon: const Icon(Icons.close),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -205,7 +211,7 @@ class _StoryPageState extends State<StoryPage> {
               if (pageIndex == 0)
                 Center(
                   child: ElevatedButton(
-                    child: Text('show modal bottom sheet'),
+                    child: const Text('show modal bottom sheet'),
                     onPressed: () async {
                       indicatorAnimationController.value =
                           IndicatorAnimationCommand(
@@ -216,7 +222,7 @@ class _StoryPageState extends State<StoryPage> {
                         builder: (context) => SizedBox(
                           height: MediaQuery.of(context).size.height / 2,
                           child: Padding(
-                            padding: EdgeInsets.all(24),
+                            padding: const EdgeInsets.all(24),
                             child: Text(
                               'Look! The indicator is now paused\n\n'
                               'It will be coutinued after closing the modal bottom sheet.',
