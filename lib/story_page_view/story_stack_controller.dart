@@ -9,12 +9,12 @@ class StoryStackController extends ValueNotifier<int> {
     this.onStoryIndexChanged,
     initialStoryIndex = 0,
   }) : super(initialStoryIndex) {
-    onStoryIndexChanged?.call(initialStoryIndex);
+    onStoryIndexChanged?.call(initialStoryIndex, -1);
   }
   final int storyLength;
   final VoidCallback onPageForward;
   final VoidCallback onPageBack;
-  final Function(int newStoryIndex)? onStoryIndexChanged;
+  final Function(int newStoryIndex, int oldPage)? onStoryIndexChanged;
 
   int get limitIndex => storyLength - 1;
 
@@ -28,7 +28,7 @@ class StoryStackController extends ValueNotifier<int> {
     } else {
       value++;
       restartAnimation?.call();
-      onStoryIndexChanged?.call(value);
+      onStoryIndexChanged?.call(value, -1);
     }
   }
 
@@ -37,7 +37,7 @@ class StoryStackController extends ValueNotifier<int> {
       onPageBack();
     } else {
       value--;
-      onStoryIndexChanged?.call(value);
+      onStoryIndexChanged?.call(value, -1);
     }
   }
 }

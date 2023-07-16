@@ -92,7 +92,7 @@ class StoryPageView extends StatefulWidget {
   final void Function(int newPageIndex)? onPageForward;
 
   /// Called whenever the user is clicks to go back or forward a story
-  final void Function(int newStoryIndex)? onStoryIndexChanged;
+  final void Function(int newStoryIndex, int newPage)? onStoryIndexChanged;
 
   @override
   StoryPageViewState createState() => StoryPageViewState();
@@ -129,10 +129,11 @@ class StoryPageViewState extends State<StoryPageView> {
             widget.onPageBack?.call(newPage);
             widget.onStoryIndexChanged?.call(
               widget.storyLength(newPage) - 1,
+              newPage
             );
           } else if (hasClients && oldPage < newPage) {
             widget.onPageForward?.call(newPage);
-            widget.onStoryIndexChanged?.call(0);
+            widget.onStoryIndexChanged?.call(0, newPage);
           }
         },
         controller: pageController,
@@ -240,7 +241,7 @@ class StoryPageFrame extends StatefulWidget {
         indicatorAnimationController,
     required Function()? onStoryPaused,
     required Function()? onStoryUnpaused,
-    required Function(int newStoryIndex)? onStoryIndexChanged,
+    required Function(int newStoryIndex, int newPage)? onStoryIndexChanged,
   }) {
     return MultiProvider(
       providers: [

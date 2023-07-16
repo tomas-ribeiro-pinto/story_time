@@ -97,7 +97,7 @@ class _Indicator extends StatelessWidget {
         padding: EdgeInsets.only(left: (index == 0) ? 0 : 4),
         child: LinearProgressIndicator(
           value: value,
-          backgroundColor: Colors.black.withOpacity(0.08),
+          backgroundColor: Colors.grey[500],
           valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
           minHeight: 2,
         ),
